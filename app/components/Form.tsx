@@ -1,38 +1,44 @@
-"use client"
-
+import Image from 'next/image'
+import React from 'react'
+import doctor from "../images/doctor.svg"
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import React, { useState } from 'react'
-
+import { Button } from '@/components/ui/button'
 
 const Form = () => {
-    const [chosenNumber, setNumber] = useState("");
-    const [userInput, setInput] = useState("");
   return (
-    <div className='flex justify-center items-center'>
-        <Card className='w-auto h-[450px] mt-30 shadow-md shadow-gray-400 flex items-center'>
-            <CardTitle className='text-2xl underline text-red-500'>Clinic system</CardTitle>
-            <CardDescription className='relative top-[-20px] font-semibold'>Monitor you health and make it a habit</CardDescription>
-            <CardContent>
-                <div className='flex w-full items-center flex-col'>
-                    <div className='w-full flex flex-row gap-[1rem]'>
-                        <Input type='text' placeholder='Enter FullName'/> 
-                          <Input type='email' placeholder='Enter Email Address'/>
-                    </div>
-                        <datalist id="dataList" onChange={(e:any) => setNumber(e.target.value)}>
-                            
-                            <option value="+63">+63</option>
+    <div className='min-h-screen min-w-screen flex justify-between text-white'>
+        <div className='flex-1/2 flex justify-center items-center h-full mt-50 w-full'>
+            <Card className='h-auto w-auto p-5 flex flex-col items-center'>
+                <CardTitle>Clinic System</CardTitle>
+                <CardDescription className='relative top-[-20px]'>Make healthy living a habit.</CardDescription>
+                <CardContent>
+                    <form className='flex flex-col items-center gap-2'>
+                         <span className='text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center'>Personal Information</span>
+                        <div className='grid grid-cols-2 gap-2'>
+                            <Input type='text' placeholder='First name'/>
+                            <Input type='text' placeholder='Last name'/>
+                            <Input type='number' placeholder='Age'/>
+                            <Input type='text' placeholder='Address'/>
+                        </div>
 
-                        </datalist>
-                      <div className='mt-7  w-full'>
-                        <Input list="dataList" value={userInput}  onChange={(e:any) => setInput(e.target.value)} type='number' placeholder='Phone number'/>
-                    </div>
-                     <div className='w-30 mt-7  flex  relative left-[-141px] flex-row gap-[1rem]'>
-                        <Input type='number' placeholder='age'/> 
-                    </div>
-                </div>
-            </CardContent>
-        </Card> 
+                        <span className='text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center'>Contact Information</span>
+                        <div className='grid grid-cols-2 gap-2'>
+                            <Input type='number' placeholder='Phone Number'/>
+                            <Input type='email' placeholder='Email' required/>
+                        </div>
+                        <Button variant={'default'} className='w-full'>Register</Button>
+                    </form>
+                </CardContent>
+            </Card>
+        </div>
+        <div>
+            <Image src={doctor} alt='Doctor'
+            width={1000}
+            height={1000}
+            className='object-cover pointer-events-none max-w-screen'
+            />
+        </div>
     </div>
   )
 }
