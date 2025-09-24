@@ -20,8 +20,21 @@ const Form = () => {
                         <div className='grid grid-cols-2 gap-2'>
                             <Input type='text' placeholder='First name'/>
                             <Input type='text' placeholder='Last name'/>
+                            <select className="border rounded p-2 w-full">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            </select>
                             <Input type='number' placeholder='Age'/>
+                            <select className="border rounded p-2 w-full">
+                            <option value="">Select Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="doctor">Doctor</option>
+                            <option value="staff">Staff</option>
+                            </select>
                             <Input type='text' placeholder='Address'/>
+                            
                         </div>
 
                         <span className='text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center'>Contact Information</span>
