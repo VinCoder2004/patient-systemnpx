@@ -133,3 +133,10 @@ input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
+.spin{
+  animation: spin 0.5s linear infinite forwards;
+}
+@keyframes spin {
+  from{rotate: 0deg}
+  to{rotate: 360deg}
+}

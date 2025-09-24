@@ -1,11 +1,13 @@
+"use client";
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import doctor from "../images/doctor.svg"
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
 const Form = () => {
+    const [loading, setLoading] = useState(false);
   return (
     <div className='min-h-screen min-w-screen flex justify-between text-white'>
         <div className='flex-1/2 flex justify-center items-center h-full mt-50 w-full'>
@@ -27,7 +29,7 @@ const Form = () => {
                             <Input type='number' placeholder='Phone Number'/>
                             <Input type='email' placeholder='Email' required/>
                         </div>
-                        <Button variant={'default'} className='w-full'>Register</Button>
+                        {loading ? <Button disabled={loading ? true : false}><span className='spin border border-b-2 border-r-0 border-t-0 w-5 h-5 rounded-full'></span> Loading</Button> : <Button variant={'default'} onClick={() => setLoading(true)} className='w-full'>Make an appointment</Button>}
                     </form>
                 </CardContent>
             </Card>
