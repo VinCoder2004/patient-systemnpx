@@ -29,7 +29,6 @@ const Form = () => {
                             <Input type='number' placeholder='Age'/>
                             <select className="border rounded p-2 w-full">
                             <option value="">Select Role</option>
-                            <option value="admin">Admin</option>
                             <option value="doctor">Doctor</option>
                             <option value="staff">Staff</option>
                             </select>
