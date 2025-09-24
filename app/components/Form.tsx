@@ -1,60 +1,116 @@
 "use client";
-import Image from 'next/image'
-import React, { useState } from 'react'
-import doctor from "../images/doctor.svg"
-import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import Image from "next/image";
+import React, { useState } from "react";
+import doctor from "../images/doctor.svg";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Form = () => {
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [gender, setGender] = useState("");
+  const [role, setRole] = useState("");
+  // pang testing if ga sulod ang mga values
+  console.log(gender);
+  console.log(role);
   return (
-    <div className='min-h-screen min-w-screen flex justify-between text-white'>
-        <div className='flex-1/2 flex justify-center items-center h-full mt-50 w-full'>
-            <Card className='h-auto w-auto p-5 flex flex-col items-center'>
-                <CardTitle>Clinic System</CardTitle>
-                <CardDescription className='relative top-[-20px]'>Make healthy living a habit.</CardDescription>
-                <CardContent>
-                    <form className='flex flex-col items-center gap-2'>
-                         <span className='text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center'>Personal Information</span>
-                        <div className='grid grid-cols-2 gap-2'>
-                            <Input type='text' placeholder='First name'/>
-                            <Input type='text' placeholder='Last name'/>
-                            <select className="border rounded p-2 w-full">
-                            <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                            </select>
-                            <Input type='number' placeholder='Age'/>
-                            <select className="border rounded p-2 w-full">
-                            <option value="">Select Role</option>
-                            <option value="doctor">Doctor</option>
-                            <option value="staff">Staff</option>
-                            </select>
-                            <Input type='text' placeholder='Address'/>
-                            
-                        </div>
+    <div className="min-h-screen min-w-screen flex justify-between text-white">
+      <div className="flex-1/2 flex justify-center items-center h-full mt-50 w-full">
+        <Card className="h-auto w-auto p-5 flex flex-col items-center">
+          <CardTitle>Clinic System</CardTitle>
+          <CardDescription className="relative top-[-20px]">
+            Make healthy living a habit.
+          </CardDescription>
+          <CardContent>
+            <form className="flex flex-col items-center gap-2">
+              <span className="text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center">
+                Personal Information
+              </span>
+              <div className="grid grid-cols-2 gap-2">
+                <Input type="text" placeholder="First name" />
+                <Input type="text" placeholder="Last name" />
+                <Select onValueChange={(value) => setGender(value)} defaultValue ={gender}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue
+                      placeholder="Gender"
+                    ></SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Select a Gender</SelectLabel>
+                      <SelectItem value="male">Male</SelectItem>
+                      <SelectItem value="female">Female</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Input type="number" placeholder="Age" />
+                <Select onValueChange={(value) => setRole(value)} value={role}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Role"></SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Select a role</SelectLabel>
+                      <SelectItem value="patient">Patient</SelectItem>
+                      <SelectItem value="doctor">Doctor</SelectItem>
+                      <SelectItem value="staff">Staff</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Input type="text" placeholder="Address" />
+              </div>
 
-                        <span className='text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center'>Contact Information</span>
-                        <div className='grid grid-cols-2 gap-2'>
-                            <Input type='number' placeholder='Phone Number'/>
-                            <Input type='email' placeholder='Email' required/>
-                        </div>
-                        {loading ? <Button disabled={loading ? true : false}><span className='spin border border-b-2 border-r-0 border-t-0 w-5 h-5 rounded-full'></span> Loading</Button> : <Button variant={'default'} onClick={() => setLoading(true)} className='w-full'>Make an appointment</Button>}
-                    </form>
-                </CardContent>
-            </Card>
-        </div>
-        <div>
-            <Image src={doctor} alt='Doctor'
-            width={1000}
-            height={1000}
-            className='object-cover pointer-events-none max-w-screen'
-            />
-        </div>
+              <span className="text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center">
+                Contact Information
+              </span>
+              <div className="grid grid-cols-2 gap-2">
+                <Input type="number" placeholder="Phone Number" />
+                <Input type="email" placeholder="Email" required />
+              </div>
+              {loading ? (
+                <Button disabled={loading ? true : false}>
+                  <span className="spin border border-b-2 border-r-0 border-t-0 w-5 h-5 rounded-full"></span>{" "}
+                  Loading
+                </Button>
+              ) : (
+                <Button
+                  variant={"default"}
+                  onClick={() => setLoading(true)}
+                  className="w-full"
+                >
+                  Make an appointment
+                </Button>
+              )}
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+      <div>
+        <Image
+          src={doctor}
+          alt="Doctor"
+          width={1000}
+          height={1000}
+          className="object-cover pointer-events-none max-w-screen"
+        />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;
