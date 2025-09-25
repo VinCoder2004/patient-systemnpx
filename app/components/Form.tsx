@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation"; // redirect
 import doctor from "../images/doctor.svg";
 import {
   Card,
@@ -21,6 +22,7 @@ import {
 } from "@/components/ui/select";
 
 const Form = () => {
+  const router = useRouter(); // router somethign dont understand
   const [loading, setLoading] = useState(false);
   const [gender, setGender] = useState("");
   const [role, setRole] = useState("");
@@ -93,9 +95,22 @@ const Form = () => {
                   onClick={() => setLoading(true)}
                   className="w-full"
                 >
-                  Make an appointment
+                 Register
                 </Button>
               )}
+
+              {/* login shts */}
+              <p className="mt-2 text-sm text-gray-200 text-center">
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  className="underline"
+                  onClick={() => router.push("/login")}
+                >
+                  Login
+                </button>
+              </p>
+
             </form>
           </CardContent>
         </Card>
