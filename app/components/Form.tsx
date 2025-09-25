@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Loader2Icon } from "lucide-react";
 
 const Form = () => {
   const router = useRouter(); // router somethign dont understand
@@ -84,9 +85,18 @@ const Form = () => {
                 <Input type="number" placeholder="Phone Number" />
                 <Input type="email" placeholder="Email" required />
               </div>
+
+              <span className="text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center">
+                Account Information
+              </span>
+              <div className="grid grid-cols-2 gap-2">
+                <Input type="text" placeholder="Username" />
+                <Input type="password" placeholder="Password" required />
+              </div>
+
               {loading ? (
                 <Button disabled={loading ? true : false}>
-                  <span className="spin border border-b-2 border-r-0 border-t-0 w-5 h-5 rounded-full"></span>{" "}
+                  <Loader2Icon className="spin"/>{" "}
                   Loading
                 </Button>
               ) : (
@@ -100,11 +110,11 @@ const Form = () => {
               )}
 
               {/* login shts */}
-              <p className="mt-2 text-sm text-gray-200 text-center">
+              <p className="mt-2 text-md text-gray-700 text-center">
                 Already have an account?{" "}
                 <button
                   type="button"
-                  className="underline"
+                  className="underline text-violet-700 cursor-pointer hover:text-violet-400"
                   onClick={() => router.push("/login")}
                 >
                   Login
