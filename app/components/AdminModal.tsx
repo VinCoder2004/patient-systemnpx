@@ -1,3 +1,5 @@
+
+
 "use client";
 import { Button } from "@/components/ui/button";
 import {
@@ -6,6 +8,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Admin {
     hide: boolean
@@ -13,13 +16,15 @@ interface Admin {
 
 const AdminModal = ({hide} : Admin) => {
     const [otp, setOtp] = useState("");
-    const placeholder = "11111" //example key
+    const placeholder = "11111" //example 
+     const router = useRouter();
     const handleSubmit = async(e:React.FormEvent) => {
         e.preventDefault();
         if(otp.length != 5) return;
         if(otp === placeholder){
             alert("Access Granted");
             setOtp("");
+             router.push("/admin");  //test
         }
         else{
             alert("Access Denied");
