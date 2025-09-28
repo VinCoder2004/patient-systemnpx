@@ -3,6 +3,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // redirect
 import doctor from "../images/doctor.svg";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 import {
   Card,
   CardContent,
@@ -21,21 +23,31 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Loader2Icon } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Form = () => {
   const router = useRouter(); // router somethign dont understand
   const [loading, setLoading] = useState(false);
   const [gender, setGender] = useState("");
   const [role, setRole] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   // pang testing if ga sulod ang mga values
   console.log(gender);
   console.log(role);
+  console.log(phoneNumber);
   return (
     <div className="min-h-screen min-w-screen flex justify-between text-white">
+      <div>
+        <Toaster position="bottom-right" reverseOrder={false} />
+      </div>
       <div className="flex-1/2 flex justify-center items-center h-full mt-50 w-full">
-        <Card className="h-auto w-auto p-5 flex flex-col items-center">
+        <Card
+          id="formHero"
+          className="h-auto w-auto p-5 flex flex-col items-center"
+        >
           <CardTitle>Clinic System</CardTitle>
-          <CardDescription className="relative top-[-20px]">
+          <CardDescription id="alreadyP" className="relative top-[-20px]">
             Make healthy living a habit.
           </CardDescription>
           <CardContent>
@@ -46,13 +58,17 @@ const Form = () => {
               <div className="grid grid-cols-2 gap-2">
                 <Input type="text" placeholder="First name" />
                 <Input type="text" placeholder="Last name" />
-                <Select onValueChange={(value) => setGender(value)} defaultValue ={gender}>
-                  <SelectTrigger className="w-full">
+                <Select
+                  onValueChange={(value) => setGender(value)}
+                  defaultValue={gender}
+                >
+                  <SelectTrigger className="w-full z-999">
                     <SelectValue
+                      id="selectValue"
                       placeholder="Gender"
                     ></SelectValue>
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="z-9999">
                     <SelectGroup>
                       <SelectLabel>Select a Gender</SelectLabel>
                       <SelectItem value="male">Male</SelectItem>
@@ -64,9 +80,12 @@ const Form = () => {
                 <Input type="number" placeholder="Age" />
                 <Select onValueChange={(value) => setRole(value)} value={role}>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Role"></SelectValue>
+                    <SelectValue
+                      id="selectValue"
+                      placeholder="Role"
+                    ></SelectValue>
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="z-9999">
                     <SelectGroup>
                       <SelectLabel>Select a role</SelectLabel>
                       <SelectItem value="patient">Patient</SelectItem>
@@ -82,7 +101,23 @@ const Form = () => {
                 Contact Information
               </span>
               <div className="grid grid-cols-2 gap-2">
-                <Input type="number" placeholder="Phone Number" />
+                <PhoneInput
+                  hideDropdown={true}
+                  forceDialCode={true}
+                  inputClassName="phoneInput"
+                  className="phoneWrapper"
+                  defaultCountry="ph"
+                  value={phoneNumber}
+                  onChange={(value) => {
+                    if (value[3] === "0") {
+                      toast.error("Number shouldn't start with zero", {
+                        style: { zIndex: "99999" },
+                      });
+                    } else {
+                      setPhoneNumber(value);
+                    }
+                  }}
+                />
                 <Input type="email" placeholder="Email" required />
               </div>
 
@@ -96,8 +131,7 @@ const Form = () => {
 
               {loading ? (
                 <Button disabled={loading ? true : false}>
-                  <Loader2Icon className="spin"/>{" "}
-                  Loading
+                  <Loader2Icon className="spin" /> Loading
                 </Button>
               ) : (
                 <Button
@@ -105,12 +139,12 @@ const Form = () => {
                   onClick={() => setLoading(true)}
                   className="w-full"
                 >
-                 Register
+                  Register
                 </Button>
               )}
 
               {/* login shts */}
-              <p className="mt-2 text-md text-gray-700 text-center">
+              <p id="alreadyP" className="mt-2 text-md text-gray-700 text-center">
                 Already have an account?{" "}
                 <button
                   type="button"
@@ -120,7 +154,6 @@ const Form = () => {
                   Login
                 </button>
               </p>
-
             </form>
           </CardContent>
         </Card>
@@ -128,7 +161,9 @@ const Form = () => {
       <div>
         <Image
           src={doctor}
+          id="heroPng"
           alt="Doctor"
+          priority
           width={1000}
           height={1000}
           className="object-cover pointer-events-none max-w-screen"

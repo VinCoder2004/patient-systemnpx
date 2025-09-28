@@ -140,3 +140,84 @@ input[type="number"] {
   from{rotate: 0deg}
   to{rotate: 360deg}
 }
+@media screen and (max-width: 500px) {
+  #heroPng{
+    @apply z-0 absolute min-h-screen min-w-screen top-[50%] left-[50%] translate-[-50%];
+  }
+  #formHero{
+    @apply absolute top-[50%] left-[50%] text-white translate-[-50%] min-w-screen z-9999 bg-[rgba(0,0,0,0.3)] backdrop-blur-[8px];
+  }
+  #formChilds{
+    @apply flex;
+  }
+  
+  .phoneInput {
+  width: 90%;
+  background: transparent !important;
+  padding: 10px 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  color: white !important;
+}
+.phoneInput .flag {
+  background-color: transparent !important;
+}
+#alreadyP{
+  @apply text-gray-200;
+}
+.phoneWrapper {
+  display: flex;
+  align-items: center;
+  background: transparent !important;
+}
+
+  Input::placeholder{
+    @apply text-white;
+  }
+  #selectValue{
+    @apply text-white;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  #heroPng{
+    @apply z-0 absolute min-h-screen min-w-screen top-[50%] left-[50%] translate-[-50%];
+  }
+  #formHero{
+    @apply absolute top-[50%] left-[50%] text-white translate-[-50%] min-w-screen z-9999 bg-[rgba(0,0,0,0.3)] backdrop-blur-[8px];
+  }
+  #formChilds{
+    @apply flex;
+  }
+  
+  .phoneInput {
+  width: 90%;
+  background: transparent !important;
+  padding: 10px 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  color: white !important;
+}
+.phoneInput .flag {
+  background-color: transparent !important;
+}
+#alreadyP{
+  @apply text-gray-200;
+}
+.phoneWrapper {
+  display: flex;
+  align-items: center;
+  background: transparent !important;
+}
+
+  Input::placeholder{
+    @apply text-white;
+  }
+  #selectValue{
+    @apply text-white;
+  }
+}
