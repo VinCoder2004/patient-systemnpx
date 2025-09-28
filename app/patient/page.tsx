@@ -48,7 +48,7 @@ export default function PatientPage() {
           </p>
           <Button
             size="lg"
-            className="bg-primary hover:bg-primary-foreground px-6 py-3 text-lg rounded-xl shadow"
+            className="bg-primary hover:bg-accent px-6 py-3 text-lg rounded-xl shadow"
             onClick={() => setActivePage("appointments")}
           >
             Book an Appointment
