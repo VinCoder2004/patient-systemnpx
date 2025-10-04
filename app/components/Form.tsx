@@ -24,18 +24,37 @@ import {
 } from "@/components/ui/select";
 import { Loader2Icon } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
+import { register } from "../hooks/action";
 
 const Form = () => {
   const router = useRouter(); // router somethign dont understand
   const [loading, setLoading] = useState(false);
+
   const [gender, setGender] = useState("");
   const [role, setRole] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [firstName, setName] = useState("");
+  const [lastName, setLastname] = useState("");
+  const [age, setAge] = useState("");
+  const [address, setAddress] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
-  // pang testing if ga sulod ang mga values
-  console.log(gender);
-  console.log(role);
-  console.log(phoneNumber);
+  const handleSubmit = async(e:any)=>{
+    e.preventDefault();
+    setLoading(true);
+    const data = await register(firstName, lastName, gender, age, address, phoneNumber, email, username, password);
+    if(data.success){
+      setLoading(false);
+      console.log(data)
+    }
+    else{
+      setLoading(false);
+      console.log(data);
+    }
+  }
+
   return (
     <div className="min-h-screen min-w-screen flex justify-between text-white">
       <div>
@@ -51,13 +70,13 @@ const Form = () => {
             Make healthy living a habit.
           </CardDescription>
           <CardContent>
-            <form className="flex flex-col items-center gap-2">
+            <form onSubmit={handleSubmit} className="flex flex-col items-center gap-2">
               <span className="text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center">
                 Personal Information
               </span>
               <div className="grid grid-cols-2 gap-2">
-                <Input type="text" placeholder="First name" />
-                <Input type="text" placeholder="Last name" />
+                <Input type="text" placeholder="First name" value={firstName} onChange={(e:any) => setName(e.target.value)} />
+                <Input type="text" placeholder="Last name" value={lastName} onChange={(e:any) => setLastname(e.target.value)}  />
                 <Select
                   onValueChange={(value) => setGender(value)}
                   defaultValue={gender}
@@ -77,7 +96,7 @@ const Form = () => {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                <Input type="number" placeholder="Age" />
+                <Input type="number" placeholder="Age"  value={age} onChange={(e:any) => setAge(e.target.value)}  />
                 <Select onValueChange={(value) => setRole(value)} value={role}>
                   <SelectTrigger className="w-full">
                     <SelectValue
@@ -94,7 +113,7 @@ const Form = () => {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                <Input type="text" placeholder="Address" />
+                <Input type="text" placeholder="Address"  value={address} onChange={(e:any) => setAddress(e.target.value)}  />
               </div>
 
               <span className="text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center">
@@ -110,6 +129,7 @@ const Form = () => {
                   value={phoneNumber}
                   onChange={(value) => {
                     if (value[3] === "0") {
+                      setPhoneNumber("");
                       toast.error("Number shouldn't start with zero", {
                         style: { zIndex: "99999" },
                       });
@@ -118,15 +138,15 @@ const Form = () => {
                     }
                   }}
                 />
-                <Input type="email" placeholder="Email" required />
+                <Input type="email" placeholder="Email" required  value={email} onChange={(e:any) => setEmail(e.target.value)} />
               </div>
 
               <span className="text-gray-700 font-[500] uppercase leading-relaxed rounded-sm w-full bg-gray-300 text-center">
                 Account Information
               </span>
               <div className="grid grid-cols-2 gap-2">
-                <Input type="text" placeholder="Username" />
-                <Input type="password" placeholder="Password" required />
+                <Input type="text" placeholder="Username"  value={username} onChange={(e:any) => setUsername(e.target.value)}  />
+                <Input type="password" placeholder="Password" required  value={password} onChange={(e:any) => setPassword(e.target.value)}  />
               </div>
 
               {loading ? (
@@ -136,7 +156,6 @@ const Form = () => {
               ) : (
                 <Button
                   variant={"default"}
-                  onClick={() => setLoading(true)}
                   className="w-full"
                 >
                   Register

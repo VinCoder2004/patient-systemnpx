@@ -11,3 +11,17 @@ export function Toast(icon: "success" | "error" | "info" | "warning", message:st
     });
     toast.fire(icon, message);
 }
+
+export async function register(firstName:string, lastName:string, gender:string, age:string, address:string, phoneNumber:string, email:string, username:string, password:string){
+    try {
+        const res = await fetch("/api/auth/register",{
+            method: "POST",
+            headers: {"Content-Type":'application/json'},
+            body: JSON.stringify({firstName, lastName, gender, age, address, phoneNumber, email, username, password})
+        });
+        const data = await res.json();
+        return data;
+    } catch (error:string | any) {
+        return {success: false, message: error.message}
+    }
+}
